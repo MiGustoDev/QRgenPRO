@@ -72,37 +72,6 @@
 
 ---
 
-## 🚀 Configuración Inicial
-
-### Instalación de Dependencias
-
-```bash
-npm install
-```
-
-### Configuración de Supabase
-
-Para habilitar el seguimiento de escaneos, necesitas configurar Supabase:
-
-1. Crea un proyecto en [Supabase](https://app.supabase.com)
-2. Ejecuta el script SQL en `supabase_setup.sql` en el SQL Editor de Supabase
-3. Configura las variables de entorno en un archivo `.env`:
-
-```env
-VITE_SUPABASE_URL=tu_url_de_supabase
-VITE_SUPABASE_ANON_KEY=tu_clave_anonima
-```
-
-Para más detalles, consulta [SETUP_SUPABASE.md](./SETUP_SUPABASE.md)
-
-### Ejecutar en Desarrollo
-
-```bash
-npm run dev
-```
-
----
-
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT.
