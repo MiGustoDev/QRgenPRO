@@ -11,7 +11,7 @@
   <h3>🚀 Generador Profesional de Códigos QR</h3>
   <p>App web moderna y completa para generar códigos QR de alta calidad con personalización avanzada</p>
 
-  <a href="https://qr-gen-2n6g.bolt.host" target="_blank">
+  <a href="https://migusto.com.ar/tools/QR/" target="_blank">
     <img src="https://img.shields.io/badge/🌐_Demo_Live-FF6B6B?style=for-the-badge" alt="Demo Live" />
   </a>
 </div>
