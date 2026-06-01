@@ -18,7 +18,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('urlLabel')}
               </label>
               <input
@@ -26,7 +26,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={data.content}
                 onChange={(e) => handleContentChange(e.target.value)}
                 placeholder={t('urlPlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
           </div>
@@ -36,7 +36,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('textLabel')}
               </label>
               <textarea
@@ -44,7 +44,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 onChange={(e) => handleContentChange(e.target.value)}
                 placeholder={t('textPlaceholder')}
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200 resize-none"
+                className="wf-input resize-none"
               />
             </div>
           </div>
@@ -54,7 +54,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('emailLabel')}
               </label>
               <input
@@ -62,7 +62,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={data.content}
                 onChange={(e) => handleContentChange(e.target.value)}
                 placeholder={t('emailPlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
           </div>
@@ -72,7 +72,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('phoneLabel')}
               </label>
               <input
@@ -80,7 +80,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={data.content}
                 onChange={(e) => handleContentChange(e.target.value)}
                 placeholder={t('phonePlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
           </div>
@@ -91,7 +91,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('networkName')}
               </label>
               <input
@@ -99,11 +99,11 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={ssid}
                 onChange={(e) => handleContentChange(`${e.target.value}|${password}|${security}`)}
                 placeholder={t('networkPlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('password')}
               </label>
               <input
@@ -111,17 +111,17 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={password}
                 onChange={(e) => handleContentChange(`${ssid}|${e.target.value}|${security}`)}
                 placeholder={t('passwordPlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('securityType')}
               </label>
               <select
                 value={security}
                 onChange={(e) => handleContentChange(`${ssid}|${password}|${e.target.value}`)}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               >
                 <option value="WPA">{t('wpaOption')}</option>
                 <option value="WEP">{t('wepOption')}</option>
@@ -136,7 +136,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('fullName')}
               </label>
               <input
@@ -144,11 +144,11 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={name}
                 onChange={(e) => handleContentChange(`${e.target.value}|${phone}|${email}`)}
                 placeholder={t('namePlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('contactPhone')}
               </label>
               <input
@@ -156,11 +156,11 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={phone}
                 onChange={(e) => handleContentChange(`${name}|${e.target.value}|${email}`)}
                 placeholder={t('contactPhonePlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-white/70 mb-2">
                 {t('contactEmail')}
               </label>
               <input
@@ -168,7 +168,7 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
                 value={email}
                 onChange={(e) => handleContentChange(`${name}|${phone}|${e.target.value}`)}
                 placeholder={t('contactEmailPlaceholder')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                className="wf-input"
               />
             </div>
           </div>
@@ -180,8 +180,8 @@ export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) =
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 sm:p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-      <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white mb-4">
+    <div className="wf-panel p-4 sm:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-slate-800 dark:text-white mb-4">
         {t(data.type)} QR Code
       </h3>
       {renderInputFields()}

@@ -1,8 +1,21 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { QRCodeData, QRCodeOptions, GeneratedQR } from '../types/qr';
 import { generateQRCode, formatQRContent } from '../utils/qrGenerator';
 import { useLocalStorage } from './useLocalStorage';
-import { saveQRToSupabase, getScanCount } from '../utils/supabaseQR';
+import { ensureQRTracking, getScanCount } from '../utils/supabaseQR';
+import { isSupabaseConfigured } from '../lib/supabase';
+import { isLegacyLogo, normalizeLogoUrl } from '../theme/waveframe';
+import { getTrackingUrl } from '../utils/trackingUrl';
+
+function sanitizeHistory(items: GeneratedQR[]): GeneratedQR[] {
+  return items.map((item) => ({
+    ...item,
+    options: {
+      ...item.options,
+      logo: normalizeLogoUrl(item.options.logo),
+    },
+  }));
+}
 
 export const useQRGenerator = () => {
   const [qrData, setQrData] = useState<QRCodeData>({
@@ -10,17 +23,32 @@ export const useQRGenerator = () => {
     content: '',
   });
 
-  const [qrOptions, setQrOptions] = useState<QRCodeOptions>({
+  const [qrOptions, setQrOptionsState] = useState<QRCodeOptions>({
     size: 256,
     errorCorrectionLevel: 'M',
     foregroundColor: '#000000',
     backgroundColor: '#FFFFFF',
   });
 
+  const setQrOptions = (options: QRCodeOptions) => {
+    setQrOptionsState({
+      ...options,
+      logo: normalizeLogoUrl(options.logo),
+    });
+  };
+
   const [currentQR, setCurrentQR] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [history, setHistory] = useLocalStorage<GeneratedQR[]>('qr-history', []);
+
+  // Migrar logos de Mi Gusto guardados en historial local
+  useEffect(() => {
+    if (!history.some((item) => isLegacyLogo(item.options.logo))) return;
+    setHistory((prev) => sanitizeHistory(prev));
+  }, [history, setHistory]);
   const [currentQRId, setCurrentQRId] = useState<string | null>(null);
+  const currentQRIdRef = useRef<string | null>(null);
+  currentQRIdRef.current = currentQRId;
   const [scanCount, setScanCount] = useState<number>(0);
 
   const generateQR = useCallback(async () => {
@@ -37,26 +65,25 @@ export const useQRGenerator = () => {
       const formattedContent = formatQRContent(qrData);
       console.log('📝 Contenido formateado para guardar:', formattedContent);
 
-      const qrId = await saveQRToSupabase(qrData, formattedContent);
-      console.log('💾 QR guardado en Supabase con ID:', qrId);
+      // Reutilizar el mismo qr_id al editar → la URL /track/:id no cambia y los escaneos se acumulan
+      const qrId = await ensureQRTracking(qrData, formattedContent, currentQRIdRef.current);
+      console.log('💾 Tracking Supabase:', qrId ? `activo (${qrId})` : 'no disponible');
 
       let contentForQR = formattedContent;
 
-      // Si se guardó exitosamente, crear URL de seguimiento (SOLO PARA URL)
+      // El QR siempre apunta a nuestra app (/track/:id) → splash + contador + redirección al destino
       if (qrId) {
-        if (qrData.type === 'url') {
-          const envUrl = import.meta.env.VITE_APP_URL || window.location.origin;
-          const baseUrl = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
-          const trackingUrl = `${baseUrl}/track/${qrId}`;
-          console.log('🔗 URL de seguimiento creada para URL:', trackingUrl);
-          contentForQR = trackingUrl;
-        } else {
-          console.log('ℹ️ Tipo no-URL detectado, usando contenido nativo directo sin redirección');
-        }
+        const trackingUrl = getTrackingUrl(qrId);
+        console.log('🔗 URL en el código QR (paso intermedio):', trackingUrl);
+        contentForQR = trackingUrl;
         setCurrentQRId(qrId);
-        setScanCount(0);
+        if (!currentQRIdRef.current) {
+          setScanCount(0);
+        }
       } else {
-        console.warn('⚠️ No se pudo guardar en Supabase, usando contenido original sin seguimiento');
+        console.warn(
+          '⚠️ Sin tracking: el QR lleva el destino directo y no registrará escaneos. Revisá .env y Supabase.'
+        );
         setCurrentQRId(null);
         setScanCount(0);
       }
@@ -113,6 +140,12 @@ export const useQRGenerator = () => {
   const removeFromHistory = (id: string) => {
     setHistory(prev => prev.filter(item => item.id !== id));
   };
+
+  // Nuevo tipo de QR → nuevo registro de tracking
+  useEffect(() => {
+    setCurrentQRId(null);
+    setScanCount(0);
+  }, [qrData.type]);
 
   // Auto-generate QR when data or options change
   useEffect(() => {
@@ -196,5 +229,7 @@ export const useQRGenerator = () => {
     removeFromHistory,
     currentQRId,
     scanCount,
+    isSupabaseConfigured,
+    trackingActive: Boolean(currentQRId),
   };
 };

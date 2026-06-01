@@ -5,7 +5,7 @@ La mayoría de los servicios de generación de códigos QR en internet te cobran
 
 💡 **La solución**
 
-Desarrollamos **QR Generator Pro**, una aplicación web completa y moderna que va más allá de la generación básica de códigos QR:
+Desarrollamos **WaveFrame QR**, una aplicación web completa y moderna que va más allá de la generación básica de códigos QR:
 
 ✅ **6 tipos de QR soportados** - URL, Texto, Email, Teléfono, WiFi y Contacto (vCard)
 ✅ **Personalización avanzada** - Tamaño variable (128-512px), colores personalizables, niveles de corrección de errores

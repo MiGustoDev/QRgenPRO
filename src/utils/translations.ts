@@ -1,8 +1,8 @@
 export const translations = {
   en: {
     // Header
-    title: 'QR Generator Pro',
-    subtitle: 'Professional QR Code Generator',
+    title: 'WaveFrame QR',
+    subtitle: 'Professional QR codes by WaveFrame Studio',
     permanentCodes: 'Permanent QR Codes',
     instantGeneration: 'Instant Generation',
     highQuality: 'High Quality',
@@ -65,6 +65,10 @@ export const translations = {
     regenerateTooltip: 'Regenerate QR Code',
     downloadButton: 'Download QR Code',
     fillFormMessage: 'Fill in the form to generate\nyour QR code',
+    scanCountLabel: 'Scans',
+    trackingUrlHint: 'The QR opens this link first (counts the scan), then redirects:',
+    trackingUnavailable:
+      'Tracking is off: the QR points directly to the destination. Check VITE_SUPABASE_* in .env and run supabase_setup.sql.',
 
     // History
     historyTitle: 'Recent QR Codes',
@@ -83,13 +87,13 @@ export const translations = {
     customizationDesc: 'Full control over colors, size, and error correction',
 
     // Footer
-    footerCopyright: '© 2025 QR Generator Pro. All rights reserved.',
+    footerCopyright: '© 2025 WaveFrame Studio. All rights reserved.',
     footerCraftedBy: 'Crafted by',
   },
   es: {
     // Header
-    title: 'Generador QR Pro',
-    subtitle: 'Generador Profesional de Códigos QR',
+    title: 'WaveFrame QR',
+    subtitle: 'Códigos QR profesionales por WaveFrame Studio',
     permanentCodes: 'Códigos QR Permanentes',
     instantGeneration: 'Generación Instantánea',
     highQuality: 'Alta Calidad',
@@ -152,6 +156,10 @@ export const translations = {
     regenerateTooltip: 'Regenerar Código QR',
     downloadButton: 'Descargar Código QR',
     fillFormMessage: 'Completa el formulario para generar\ntu código QR',
+    scanCountLabel: 'Escaneos',
+    trackingUrlHint: 'El QR abre primero este enlace (cuenta la vista) y luego redirige a:',
+    trackingUnavailable:
+      'Sin seguimiento: el QR va directo al destino. Revisá VITE_SUPABASE_* en .env y ejecutá supabase_setup.sql en Supabase.',
 
     // History
     historyTitle: 'Códigos QR Recientes',
@@ -170,7 +178,7 @@ export const translations = {
     customizationDesc: 'Control total sobre colores, tamaño y corrección de errores',
 
     // Footer
-    footerCopyright: '© 2025 Generador QR Pro. Todos los derechos reservados.',
+    footerCopyright: '© 2025 WaveFrame Studio. Todos los derechos reservados.',
     footerCraftedBy: 'Creado por',
   },
 };
