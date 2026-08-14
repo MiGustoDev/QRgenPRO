@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { QrCode, Sparkles, Shield, Zap } from 'lucide-react';
 import { DarkModeToggle } from './components/DarkModeToggle';
 import { LanguageToggle } from './components/LanguageToggle';
@@ -11,8 +12,9 @@ import { useQRGenerator } from './hooks/useQRGenerator';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useLanguage } from './hooks/useLanguage';
 import { getTranslation } from './utils/translations';
+import RedirectHandler from './pages/RedirectHandler';
 
-function App() {
+function MainGenerator() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { language, toggleLanguage } = useLanguage();
   const {
@@ -90,7 +92,6 @@ function App() {
 
             {/* Input Form */}
             <QRInputForm data={qrData} onChange={setQrData} t={t} />
-
 
             {/* Logo Options */}
             <LogoOptions options={qrOptions} onChange={setQrOptions} t={t} />
@@ -172,6 +173,17 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/r" element={<RedirectHandler />} />
+      <Route path="/track" element={<RedirectHandler />} />
+      <Route path="/track/:qrId" element={<RedirectHandler />} />
+      <Route path="*" element={<MainGenerator />} />
+    </Routes>
   );
 }
 

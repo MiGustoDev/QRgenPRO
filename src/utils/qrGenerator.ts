@@ -75,27 +75,28 @@ const loadImage = (src: string): Promise<HTMLImageElement> => {
   });
 };
 
-export const formatQRContent = (data: QRCodeData, trackingUrl?: string): string => {
-  // Si hay una URL de seguimiento, usarla en lugar del contenido original
-  if (trackingUrl) {
-    return trackingUrl;
+export const formatQRContent = (data: QRCodeData, customTrackingUrl?: string): string => {
+  if (customTrackingUrl) {
+    return customTrackingUrl;
   }
 
   switch (data.type) {
     case 'url':
-      return data.content.startsWith('http') ? data.content : `https://${data.content}`;
+      return data.content.startsWith('http://') || data.content.startsWith('https://')
+        ? data.content
+        : `https://${data.content}`;
     case 'email':
-      return `mailto:${data.content}`;
+      return data.content.startsWith('mailto:') ? data.content : `mailto:${data.content}`;
     case 'phone':
-      return `tel:${data.content}`;
-    case 'wifi':
-      // Format: WIFI:T:WPA;S:NetworkName;P:Password;H:false;;
+      return data.content.startsWith('tel:') ? data.content : `tel:${data.content}`;
+    case 'wifi': {
       const [ssid, password, security] = data.content.split('|');
       return `WIFI:T:${security || 'WPA'};S:${ssid};P:${password};H:false;;`;
-    case 'vcard':
-      // Simple vCard format
+    }
+    case 'vcard': {
       const [name, phone, email] = data.content.split('|');
       return `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
+    }
     default:
       return data.content;
   }
