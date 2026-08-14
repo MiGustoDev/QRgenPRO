@@ -4,6 +4,7 @@ export interface QRCodeOptions {
   foregroundColor: string;
   backgroundColor: string;
   logo?: string;
+  logoSize?: number;
 }
 
 export interface QRCodeData {

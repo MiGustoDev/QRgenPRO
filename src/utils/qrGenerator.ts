@@ -35,17 +35,26 @@ export const generateQRCode = async (
 
     // Load and draw logo
     const logoImage = await loadImage(options.logo);
-    const logoSize = options.size * 0.2; // Logo is 20% of QR size
+    const logoScale = options.logoSize || 0.26; // Increased from 0.20 to 0.26 for a larger, clearer logo
+    const logoSize = options.size * logoScale;
     const logoX = (options.size - logoSize) / 2;
     const logoY = (options.size - logoSize) / 2;
 
-    // Draw white background for logo
-    ctx.fillStyle = options.backgroundColor;
-    const bgSize = logoSize + 4; // Slight padding
+    // Draw background for logo with rounded corners
+    const padding = Math.max(4, Math.round(options.size * 0.015));
+    const bgSize = logoSize + padding;
     const bgX = (options.size - bgSize) / 2;
     const bgY = (options.size - bgSize) / 2;
-    // Draw rounded rect equivalent
-    ctx.fillRect(bgX, bgY, bgSize, bgSize);
+    const borderRadius = Math.round(bgSize * 0.15);
+
+    ctx.fillStyle = options.backgroundColor;
+    if (typeof ctx.roundRect === 'function') {
+      ctx.beginPath();
+      ctx.roundRect(bgX, bgY, bgSize, bgSize, borderRadius);
+      ctx.fill();
+    } else {
+      ctx.fillRect(bgX, bgY, bgSize, bgSize);
+    }
 
     ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
 

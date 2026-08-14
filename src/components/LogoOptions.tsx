@@ -125,22 +125,44 @@ export const LogoOptions: React.FC<LogoOptionsProps> = ({ options, onChange, t }
                     />
 
                     {options.logo ? (
-                        <div className="relative inline-block">
-                            <img
-                                src={options.logo}
-                                alt="Selected logo"
-                                className="h-16 w-16 object-contain rounded-lg mx-auto"
-                            />
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    removeLogo();
-                                }}
-                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-sm"
-                                title={t('removeLogo')}
-                            >
-                                <X className="w-3 h-3" />
-                            </button>
+                        <div className="space-y-4">
+                            <div className="relative inline-block">
+                                <img
+                                    src={options.logo}
+                                    alt="Selected logo"
+                                    className="h-16 w-16 object-contain rounded-lg mx-auto"
+                                />
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        removeLogo();
+                                    }}
+                                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-sm"
+                                    title={t('removeLogo')}
+                                >
+                                    <X className="w-3 h-3" />
+                                </button>
+                            </div>
+
+                            <div className="pt-2" onClick={(e) => e.stopPropagation()}>
+                                <div className="flex justify-between items-center mb-1">
+                                    <label className="text-xs font-medium text-gray-600 dark:text-gray-300">
+                                        Tamaño del Logo
+                                    </label>
+                                    <span className="text-xs font-semibold text-purple-600 dark:text-orange-400">
+                                        {Math.round((options.logoSize || 0.26) * 100)}%
+                                    </span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0.15"
+                                    max="0.30"
+                                    step="0.01"
+                                    value={options.logoSize || 0.26}
+                                    onChange={(e) => onChange({ ...options, logoSize: parseFloat(e.target.value) })}
+                                    className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-600 dark:accent-orange-400 slider"
+                                />
+                            </div>
                         </div>
                     ) : (
                         <div className="space-y-2 cursor-pointer">
