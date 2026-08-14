@@ -1,147 +1,190 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { incrementScanCount } from '../utils/supabaseQR';
-import { WaveFrameLogo } from '../components/WaveFrameBrand';
-import { TrackSplash, waitForTrackSplash } from '../components/TrackSplash';
 
 export default function Track() {
   const { qrId } = useParams<{ qrId: string }>();
   const navigate = useNavigate();
-  const [phase, setPhase] = useState<'splash' | 'error' | 'done'>('splash');
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const redirectStarted = useRef(false);
+  const [debugInfo, setDebugInfo] = useState<any>(null);
 
   useEffect(() => {
-    const redirectTo = (url: string) => {
-      if (redirectStarted.current) return;
-      redirectStarted.current = true;
-      window.location.replace(url);
-    };
-
     const handleRedirect = async () => {
       if (!qrId) {
         setError('QR ID no válido');
-        setPhase('error');
-        return;
-      }
-
-      if (!isSupabaseConfigured) {
-        setError('Supabase no está configurado. Revisá el archivo .env del proyecto.');
-        setPhase('error');
+        setLoading(false);
         return;
       }
 
       try {
-        await waitForTrackSplash(async () => {
-          let { data, error: fetchError } = await supabase
+        console.log('🔍 Buscando QR con ID:', qrId);
+
+        // Obtener el QR de Supabase
+        let { data, error: fetchError } = await supabase
+          .from('qr_codes')
+          .select('*')
+          .eq('qr_id', qrId)
+          .single();
+
+        console.log('📊 Resultado directo:', { data, error: fetchError });
+
+        // Si no se encuentra, intentar buscar todos y filtrar manualmente
+        if (fetchError || !data) {
+          console.log('⚠️ Primera búsqueda falló, intentando búsqueda alternativa...');
+          const { data: allData, error: allError } = await supabase
             .from('qr_codes')
-            .select('*')
-            .eq('qr_id', qrId)
-            .single();
+            .select('*');
 
-          if (fetchError || !data) {
-            const { data: allData, error: allError } = await supabase
-              .from('qr_codes')
-              .select('*');
+          console.log('📋 Todos los QRs:', { allData, allError });
 
-            if (!allError && allData) {
-              data =
-                allData.find((item) => String(item.qr_id) === String(qrId)) || null;
-              fetchError = data
-                ? null
-                : { message: 'QR no encontrado después de búsqueda manual' };
-            }
+          if (!allError && allData) {
+            // Buscar manualmente por qr_id (puede ser string o UUID)
+            data = allData.find(item => {
+              const itemId = String(item.qr_id);
+              const searchId = String(qrId);
+              console.log(`🔎 Comparando: "${itemId}" === "${searchId}"`, itemId === searchId);
+              return itemId === searchId;
+            }) || null;
+            fetchError = data ? null : { message: 'QR no encontrado después de búsqueda manual' };
           }
+        }
 
-          if (fetchError) {
-            throw new Error(`QR no encontrado: ${fetchError.message}`);
-          }
+        console.log('✅ Resultado final de la consulta:', { data, fetchError });
+        setDebugInfo({ data, error: fetchError, qrId });
 
-          if (!data) {
-            throw new Error(
-              'QR no encontrado en la base de datos. Generá un nuevo código con Supabase configurado.'
-            );
-          }
+        if (fetchError) {
+          console.error('❌ Error al buscar QR:', fetchError);
+          setError(`QR no encontrado: ${fetchError.message}`);
+          setLoading(false);
+          return;
+        }
 
-          const originalContent = data.original_content;
-          if (originalContent?.includes('/track/')) {
-            throw new Error(
-              'El QR fue guardado incorrectamente. Por favor, generá un nuevo código.'
-            );
-          }
+        if (!data) {
+          console.error('❌ No se encontró data para el QR');
+          setError('QR no encontrado en la base de datos. Verifica que el QR fue generado después de configurar Supabase.');
+          setLoading(false);
+          return;
+        }
 
-          if (!originalContent) {
-            throw new Error('El QR no tiene contenido original');
-          }
+        console.log('✅ QR encontrado!');
+        console.log('📝 Contenido original:', data.original_content);
+        console.log('📝 Tipo de QR:', data.qr_type);
+        console.log('📝 Datos completos:', data);
 
-          const counted = await incrementScanCount(qrId);
-          if (!counted) {
-            console.warn('[WaveFrame QR] No se pudo incrementar el contador de escaneos');
-          }
+        // Verificar que el contenido original no sea una URL de tracking
+        const originalContent = data.original_content;
+        if (originalContent && originalContent.includes('/track/')) {
+          console.error('⚠️ ERROR: El contenido original es una URL de tracking! Esto indica un problema en cómo se guardó el QR.');
+          setError('Error: El QR fue guardado incorrectamente. Por favor, genera un nuevo QR.');
+          setLoading(false);
+          return;
+        }
 
-          if (
-            originalContent.startsWith('http://') ||
-            originalContent.startsWith('https://')
-          ) {
-            redirectTo(originalContent);
-            return;
-          }
+        if (!originalContent) {
+          setError('El QR no tiene contenido original');
+          setLoading(false);
+          return;
+        }
 
-          if (originalContent.startsWith('mailto:') || originalContent.startsWith('tel:')) {
-            redirectTo(originalContent);
-            return;
-          }
+        // Incrementar el contador de escaneos
+        console.log('📈 Incrementando contador...');
+        await incrementScanCount(qrId);
+        console.log('✅ Contador incrementado');
 
-          if (
-            originalContent.startsWith('WIFI:') ||
-            originalContent.startsWith('BEGIN:VCARD')
-          ) {
-            if (navigator.clipboard) {
-              await navigator.clipboard.writeText(originalContent);
-            }
-            setPhase('done');
-            return;
-          }
+        console.log('🚀 Redirigiendo a:', originalContent);
 
+        // Forzar redirección inmediata
+        // Si es una URL, redirigir directamente
+        if (originalContent.startsWith('http://') || originalContent.startsWith('https://')) {
+          console.log('🌐 Redirigiendo a URL:', originalContent);
+          window.location.href = originalContent;
+          // También intentar con replace como respaldo
+          setTimeout(() => {
+            window.location.replace(originalContent);
+          }, 100);
+          return;
+        }
+
+        // Si es mailto, tel, etc., intentar abrir
+        if (originalContent.startsWith('mailto:') || originalContent.startsWith('tel:')) {
+          console.log('📞 Redirigiendo a:', originalContent);
+          window.location.href = originalContent;
+          setTimeout(() => {
+            window.location.replace(originalContent);
+          }, 100);
+          return;
+        }
+
+        // Si es WiFi o vCard, copiar al portapapeles y mostrar mensaje
+        if (originalContent.startsWith('WIFI:') || originalContent.startsWith('BEGIN:VCARD')) {
           if (navigator.clipboard) {
             await navigator.clipboard.writeText(originalContent);
           }
-          redirectTo(
-            `data:text/plain;charset=utf-8,${encodeURIComponent(originalContent)}`
-          );
-        });
+          setError(null);
+          setLoading(false);
+          return;
+        }
+
+        // Para texto plano
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(originalContent);
+        }
+        window.location.href = `data:text/plain;charset=utf-8,${encodeURIComponent(originalContent)}`;
+        setTimeout(() => {
+          window.location.replace(`data:text/plain;charset=utf-8,${encodeURIComponent(originalContent)}`);
+        }, 100);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error desconocido');
-        setPhase('error');
+        console.error('❌ Error processing QR redirect:', err);
+        setError(`Error al procesar el QR: ${err instanceof Error ? err.message : 'Error desconocido'}`);
+        setLoading(false);
       }
     };
 
     handleRedirect();
   }, [qrId]);
 
-  if (phase === 'splash') {
-    return <TrackSplash />;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+        <div className="text-center">
+          {/* Logo */}
+          <div className="mb-8 flex justify-center">
+            <img
+              src={`${import.meta.env.BASE_URL}logo-migusto.png`}
+              alt="Mi Gusto Logo"
+              className="h-24 w-auto object-contain"
+            />
+          </div>
+
+          {/* Spinner */}
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+
+          {/* Texto */}
+          <p className="text-white text-lg font-medium animate-pulse">Redirigiendo...</p>
+        </div>
+      </div>
+    );
   }
 
-  if (phase === 'error' && error) {
+  if (error) {
     return (
-      <div className="min-h-screen min-h-[100dvh] bg-[#060c14] flex items-center justify-center p-4">
-        <div className="text-center max-w-md w-full rounded-2xl border border-white/10 bg-[#0d1520] p-8 shadow-wf-lg">
-          <WaveFrameLogo className="h-14 w-auto mx-auto mb-6" />
-          <p className="text-[#ff4081] mb-6 font-medium">{error}</p>
-          <div className="flex flex-wrap justify-center gap-3">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+        <div className="text-center bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl max-w-2xl w-full">
+          <p className="text-red-600 dark:text-red-400 mb-4 font-semibold">{error}</p>
+
+
+          <div className="mt-6 space-x-4">
             <button
-              type="button"
               onClick={() => navigate('/')}
-              className="wf-btn-primary"
+              className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
             >
               Volver al inicio
             </button>
             <button
-              type="button"
               onClick={() => window.location.reload()}
-              className="px-5 py-2 rounded-lg border border-white/15 text-white/80 hover:bg-white/5 transition-colors"
+              className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
             >
               Reintentar
             </button>
@@ -153,3 +196,4 @@ export default function Track() {
 
   return null;
 }
+

@@ -1,39 +1,88 @@
-# WaveFrame QR Generator
+# 🎯 QR Generator Pro
 
 <div align="center">
-  <img src="public/icon.png" alt="WaveFrame Studio" width="120" />
-  <h3>Generador profesional de códigos QR</h3>
-  <p>App web con temática WaveFrame Studio — personalización, tracking y analytics con Supabase</p>
+  <img src="https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Vite-5.4.2-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+</div>
 
-  <a href="https://waveframe.com.ar" target="_blank">
-    <img src="https://img.shields.io/badge/WaveFrame_Studio-33ffb5?style=for-the-badge" alt="WaveFrame Studio" />
+<div align="center">
+  <h3>🚀 Generador Profesional de Códigos QR</h3>
+  <p>App web moderna y completa para generar códigos QR de alta calidad con personalización avanzada</p>
+
+  <a href="https://migusto.com.ar/tools/QR/" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_Demo_Live-FF6B6B?style=for-the-badge" alt="Demo Live" />
   </a>
 </div>
+<img src="Demo.png" alt="Demo"/>
 
 ---
 
-## Características
+## ✨ Características Principales
 
-- 6 tipos de QR: URL, texto, email, teléfono, WiFi y contacto (vCard)
-- Logos WaveFrame (`icon.png`, `iconqr.png`) integrados en el centro del QR
-- Seguimiento de escaneos con Supabase
-- Historial local, modo oscuro y español/inglés
-- Stack: React, TypeScript, Vite, Tailwind CSS
+### 🎨 **Interfaz Moderna**
+- **Diseño responsive** optimizado para móviles, tablets y desktop
+- **Modo oscuro/claro** con transiciones suaves
+- **Soporte multiidioma** (Español/Inglés)
+- **Animaciones fluidas** y micro-interacciones
 
-## Configuración
+### 🔧 **Tipos de QR Soportados**
+- 🔗 **URL/Enlaces** - Sitios web y enlaces directos
+- 📝 **Texto** - Mensajes y contenido de texto
+- 📧 **Email** - Direcciones de correo electrónico
+- 📱 **Teléfono** - Números telefónicos
+- 📶 **WiFi** - Credenciales de red inalámbrica
+- 👤 **Contacto** - Tarjetas vCard con información personal
 
-1. Copiá `.env.example` a `.env` con tus credenciales de Supabase
-2. Ejecutá `supabase_setup.sql` en el SQL Editor de Supabase
-3. `pnpm install` y `pnpm run dev`
+### 🎯 **Personalización Avanzada**
+- **Tamaño variable** (128px - 512px)
+- **Colores personalizables** (primer plano y fondo)
+- **Niveles de corrección de errores** (L, M, Q, H)
+- **Vista previa en tiempo real**
 
-## Assets en `/public`
+### 💾 **Gestión de Historial**
+- **Historial automático** de códigos generados
+- **Descarga individual** de códigos QR
+- **Eliminación selectiva** de registros
+- **Persistencia local** de datos
 
-| Archivo        | Uso                          |
-|----------------|------------------------------|
-| `icon.png`     | Logo principal WaveFrame     |
-| `iconqr.png`   | Variante para QR / favicon   |
-| `favicon.ico`  | Favicon del sitio            |
+### 📊 **Seguimiento de Escaneos**
+- **Seguimiento en tiempo real** de escaneos de códigos QR
+- **Almacenamiento en Supabase** para estadísticas persistentes
+- **Contador de escaneos** visible en la interfaz
+- **Redirección inteligente** que registra cada escaneo automáticamente
 
-## Licencia
+---
 
-MIT — © WaveFrame Studio
+## 🛠️ Tecnologías Utilizadas
+
+### Frontend
+- **React 18.3.1** - Biblioteca de interfaz de usuario
+- **TypeScript 5.5.3** - Tipado estático
+- **Tailwind CSS 3.4.1** - Framework de estilos
+- **Vite 5.4.2** - Herramienta de construcción
+
+### Librerías Principales
+- **qrcode** - Generación de códigos QR
+- **lucide-react** - Iconografía moderna
+- **@types/qrcode** - Tipado para QR
+- **@supabase/supabase-js** - Cliente de Supabase para seguimiento
+- **react-router-dom** - Enrutamiento para páginas de seguimiento
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT.
+
+---
+
+
+<div align="center">
+  <p>⭐ Si te gusta este proyecto, ¡dale una estrella en GitHub! ⭐</p>
+  
+  <a href="https://qr-gen-2n6g.bolt.host" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_Ver_Demo-4CAF50?style=for-the-badge" alt="Ver Demo" />
+  </a>
+</div>

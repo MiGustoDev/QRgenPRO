@@ -7,7 +7,7 @@ export const useDarkMode = () => {
     if (saved !== null) {
       return JSON.parse(saved);
     }
-    return true;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
   useEffect(() => {
