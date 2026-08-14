@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { QRCodeOptions } from '../types/qr';
 
 interface QRCustomizationProps {
@@ -7,7 +7,7 @@ interface QRCustomizationProps {
   t: (key: string) => string;
 }
 
-export const QRCustomization: React.FC<QRCustomizationProps> = ({
+export const QRCustomization: FC<QRCustomizationProps> = ({
   options,
   onChange,
   t,

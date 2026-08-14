@@ -19,4 +19,5 @@ export interface GeneratedQR {
   options: QRCodeOptions;
   qrCode: string;
   timestamp: Date;
+  scanCount?: number;
 }

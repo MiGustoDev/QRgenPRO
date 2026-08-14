@@ -1,4 +1,3 @@
-import React from 'react';
 import { QrCode, Sparkles, Shield, Zap } from 'lucide-react';
 import { DarkModeToggle } from './components/DarkModeToggle';
 import { LanguageToggle } from './components/LanguageToggle';

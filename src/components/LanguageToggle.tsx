@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Globe } from 'lucide-react';
 import { Language } from '../hooks/useLanguage';
 
@@ -7,7 +7,7 @@ interface LanguageToggleProps {
   onToggle: () => void;
 }
 
-export const LanguageToggle: React.FC<LanguageToggleProps> = ({ language, onToggle }) => {
+export const LanguageToggle: FC<LanguageToggleProps> = ({ language, onToggle }) => {
   return (
     <button
       onClick={onToggle}

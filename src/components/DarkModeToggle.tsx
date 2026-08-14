@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
 interface DarkModeToggleProps {
@@ -6,7 +6,7 @@ interface DarkModeToggleProps {
   onToggle: () => void;
 }
 
-export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ isDarkMode, onToggle }) => {
+export const DarkModeToggle: FC<DarkModeToggleProps> = ({ isDarkMode, onToggle }) => {
   return (
     <button
       onClick={onToggle}

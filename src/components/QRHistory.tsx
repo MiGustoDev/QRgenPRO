@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Download, Trash2, Clock, X, Eye } from 'lucide-react';
 import { GeneratedQR } from '../types/qr';
 import { downloadQRCode } from '../utils/qrGenerator';
@@ -10,7 +10,7 @@ interface QRHistoryProps {
   t: (key: string) => string;
 }
 
-export const QRHistory: React.FC<QRHistoryProps> = ({ 
+export const QRHistory: FC<QRHistoryProps> = ({ 
   history, 
   onClearHistory, 
   onRemoveItem, 

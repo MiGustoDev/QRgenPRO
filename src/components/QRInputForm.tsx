@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { QRCodeData } from '../types/qr';
 
 interface QRInputFormProps {
@@ -7,7 +7,7 @@ interface QRInputFormProps {
   t: (key: string) => string;
 }
 
-export const QRInputForm: React.FC<QRInputFormProps> = ({ data, onChange, t }) => {
+export const QRInputForm: FC<QRInputFormProps> = ({ data, onChange, t }) => {
   const handleContentChange = (content: string) => {
     onChange({ ...data, content });
   };

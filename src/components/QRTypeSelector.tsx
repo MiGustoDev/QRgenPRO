@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Link, Type, Mail, Phone, Wifi, User } from 'lucide-react';
 import { getTranslation } from '../utils/translations';
 
@@ -8,7 +8,7 @@ interface QRTypeSelectorProps {
   t: (key: string) => string;
 }
 
-export const QRTypeSelector: React.FC<QRTypeSelectorProps> = ({
+export const QRTypeSelector: FC<QRTypeSelectorProps> = ({
   selectedType,
   onTypeChange,
   t,

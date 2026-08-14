@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { FC, useRef, useState, ChangeEvent, DragEvent } from 'react';
 import { QRCodeOptions } from '../types/qr';
 import { Link, Type, Mail, Phone, Wifi, User, Upload, X } from 'lucide-react';
 
@@ -8,7 +8,7 @@ interface LogoOptionsProps {
     t: (key: string) => string;
 }
 
-export const LogoOptions: React.FC<LogoOptionsProps> = ({ options, onChange, t }) => {
+export const LogoOptions: FC<LogoOptionsProps> = ({ options, onChange, t }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -39,7 +39,7 @@ export const LogoOptions: React.FC<LogoOptionsProps> = ({ options, onChange, t }
         onChange({ ...options, logo: dataUri });
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             processFile(e.target.files[0]);
         }
@@ -55,17 +55,17 @@ export const LogoOptions: React.FC<LogoOptionsProps> = ({ options, onChange, t }
         reader.readAsDataURL(file);
     };
 
-    const handleDragOver = (e: React.DragEvent) => {
+    const handleDragOver = (e: DragEvent) => {
         e.preventDefault();
         setIsDragging(true);
     };
 
-    const handleDragLeave = (e: React.DragEvent) => {
+    const handleDragLeave = (e: DragEvent) => {
         e.preventDefault();
         setIsDragging(false);
     };
 
-    const handleDrop = (e: React.DragEvent) => {
+    const handleDrop = (e: DragEvent) => {
         e.preventDefault();
         setIsDragging(false);
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {

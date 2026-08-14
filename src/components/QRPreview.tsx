@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Download, RotateCcw } from 'lucide-react';
 import { downloadQRCode } from '../utils/qrGenerator';
 
@@ -10,7 +10,7 @@ interface QRPreviewProps {
   t: (key: string) => string;
 }
 
-export const QRPreview: React.FC<QRPreviewProps> = ({
+export const QRPreview: FC<QRPreviewProps> = ({
   qrCode,
   isGenerating,
   onRegenerate,
