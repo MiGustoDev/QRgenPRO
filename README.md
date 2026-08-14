@@ -47,12 +47,6 @@
 - **Eliminación selectiva** de registros
 - **Persistencia local** de datos
 
-### 📊 **Seguimiento de Escaneos**
-- **Seguimiento en tiempo real** de escaneos de códigos QR
-- **Almacenamiento en Supabase** para estadísticas persistentes
-- **Contador de escaneos** visible en la interfaz
-- **Redirección inteligente** que registra cada escaneo automáticamente
-
 ---
 
 ## 🛠️ Tecnologías Utilizadas
@@ -67,8 +61,7 @@
 - **qrcode** - Generación de códigos QR
 - **lucide-react** - Iconografía moderna
 - **@types/qrcode** - Tipado para QR
-- **@supabase/supabase-js** - Cliente de Supabase para seguimiento
-- **react-router-dom** - Enrutamiento para páginas de seguimiento
+
 
 ---
 
