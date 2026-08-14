@@ -150,15 +150,15 @@ export const LogoOptions: React.FC<LogoOptionsProps> = ({ options, onChange, t }
                                         Tamaño del Logo
                                     </label>
                                     <span className="text-xs font-semibold text-purple-600 dark:text-orange-400">
-                                        {Math.round((options.logoSize || 0.26) * 100)}%
+                                        {Math.round((options.logoSize || 0.30) * 100)}%
                                     </span>
                                 </div>
                                 <input
                                     type="range"
                                     min="0.15"
-                                    max="0.30"
+                                    max="0.35"
                                     step="0.01"
-                                    value={options.logoSize || 0.26}
+                                    value={options.logoSize || 0.30}
                                     onChange={(e) => onChange({ ...options, logoSize: parseFloat(e.target.value) })}
                                     className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-600 dark:accent-orange-400 slider"
                                 />

@@ -35,7 +35,7 @@ export const generateQRCode = async (
 
     // Load and draw logo
     const logoImage = await loadImage(options.logo);
-    const logoScale = options.logoSize || 0.26; // Increased from 0.20 to 0.26 for a larger, clearer logo
+    const logoScale = options.logoSize || 0.30; // Increased to 0.30 for a larger center logo
     const logoSize = options.size * logoScale;
     const logoX = (options.size - logoSize) / 2;
     const logoY = (options.size - logoSize) / 2;
