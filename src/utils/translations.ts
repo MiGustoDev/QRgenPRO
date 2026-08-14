@@ -84,7 +84,9 @@ export const translations = {
 
     // Footer
     footerCopyright: '© 2025 QR Generator Pro. All rights reserved.',
-    footerCraftedBy: 'Crafted by',
+    footerCreatedBy: 'Created by the',
+    footerDept: 'IT department',
+    footerCompany: 'of Mi Gusto.',
   },
   es: {
     // Header
@@ -171,7 +173,9 @@ export const translations = {
 
     // Footer
     footerCopyright: '© 2025 Generador QR Pro. Todos los derechos reservados.',
-    footerCraftedBy: 'Creado por',
+    footerCreatedBy: 'Creado por el',
+    footerDept: 'departamento de sistemas',
+    footerCompany: 'de Mi Gusto.',
   },
 };
 
