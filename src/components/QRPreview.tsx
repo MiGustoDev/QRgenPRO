@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Download, RotateCcw } from 'lucide-react';
+import React from 'react';
+import { Download, RotateCcw, Eye } from 'lucide-react';
 import { downloadQRCode } from '../utils/qrGenerator';
 
 interface QRPreviewProps {
@@ -7,14 +7,18 @@ interface QRPreviewProps {
   isGenerating: boolean;
   onRegenerate: () => void;
   onSaveToHistory: () => void;
+  scanCount?: number;
+  qrId?: string | null;
   t: (key: string) => string;
 }
 
-export const QRPreview: FC<QRPreviewProps> = ({
+export const QRPreview: React.FC<QRPreviewProps> = ({
   qrCode,
   isGenerating,
   onRegenerate,
   onSaveToHistory,
+  scanCount = 0,
+  qrId,
   t,
 }) => {
   const handleDownload = () => {
@@ -37,6 +41,18 @@ export const QRPreview: FC<QRPreviewProps> = ({
           <RotateCcw className={`w-5 h-5 ${isGenerating ? 'animate-spin' : ''}`} />
         </button>
       </div>
+
+      {/* Estadísticas de escaneos */}
+      {qrId && (
+        <div className="mb-4 p-3 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+          <div className="flex items-center space-x-2 text-sm">
+            <Eye className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+            <span className="text-gray-700 dark:text-gray-300 font-medium">
+              Escaneos: <span className="text-purple-600 dark:text-purple-400 font-bold">{scanCount}</span>
+            </span>
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-col items-center">
         <div className="relative mb-4 sm:mb-6">

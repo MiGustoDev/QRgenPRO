@@ -29,6 +29,8 @@ function MainGenerator() {
     saveToHistory,
     clearHistory,
     removeFromHistory,
+    currentQRId,
+    scanCount,
   } = useQRGenerator();
 
   const t = (key: string) => getTranslation(language, key);
@@ -108,6 +110,8 @@ function MainGenerator() {
               isGenerating={isGenerating}
               onRegenerate={generateQR}
               onSaveToHistory={saveToHistory}
+              scanCount={scanCount}
+              qrId={currentQRId}
               t={t}
             />
 

@@ -17,6 +17,9 @@ export default function RedirectHandler() {
       const toParam = searchParams.get('to') || searchParams.get('url') || searchParams.get('target');
       const idParam = pathQrId || searchParams.get('id') || searchParams.get('qrId');
 
+      // Crear promesa de retraso mínimo para mostrar la pantalla de carga con el logo
+      const delayPromise = new Promise(resolve => setTimeout(resolve, 1500));
+
       // 2. Si existe parámetro 'to' / 'url', es una redirección auto-contenida (Zero Database)
       if (toParam) {
         try {
@@ -42,7 +45,10 @@ export default function RedirectHandler() {
           // Registrar escaneo local
           registerLocalScan(targetUrl);
 
-          // Redirigir de inmediato
+          // Esperar el retraso mínimo antes de redirigir
+          await delayPromise;
+
+          // Redirigir
           window.location.replace(targetUrl);
           return;
         } catch (err) {
@@ -66,15 +72,18 @@ export default function RedirectHandler() {
               destination = `https://${destination}`;
             }
 
-            // Incrementar contador de escaneos en Supabase sin bloquear redirección
+            // Incrementar contador de escaneos en Supabase
             try {
               await client
                 .from('qr_codes')
                 .update({ scan_count: (data.scan_count || 0) + 1 })
                 .eq('qr_id', idParam);
-            } catch {
-              // Ignorar error al incrementar contador
+            } catch (err) {
+              console.warn('No se pudo actualizar el contador de escaneos:', err);
             }
+
+            // Esperar el retraso mínimo antes de redirigir
+            await delayPromise;
 
             window.location.replace(destination);
             return;
@@ -109,29 +118,30 @@ export default function RedirectHandler() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col items-center justify-center p-4">
-        <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full border border-gray-100 dark:border-gray-700">
-          <div className="mb-6 flex justify-center">
+      <div className="min-h-screen bg-[#000000] flex flex-col items-center justify-center p-4 select-none">
+        <div className="flex flex-col items-center max-w-sm w-full text-center animate-fade-in">
+          {/* Logo container with subtle gold glow */}
+          <div className="mb-8 relative">
             <img
               src={`${import.meta.env.BASE_URL}logo-migusto.png`}
               alt="Mi Gusto Logo"
-              className="h-16 w-auto object-contain"
+              className="relative h-28 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(212,175,55,0.2)]"
               onError={(e) => {
-                // Fallback si no carga el logo
                 (e.target as HTMLElement).style.display = 'none';
               }}
             />
           </div>
 
-          <div className="relative w-16 h-16 mx-auto mb-6">
-            <div className="absolute inset-0 rounded-full border-4 border-purple-200 dark:border-purple-900 opacity-25"></div>
-            <div className="absolute inset-0 rounded-full border-4 border-purple-600 border-t-transparent animate-spin"></div>
+          {/* Premium Animated Spinner in Gold */}
+          <div className="relative w-12 h-12 mb-6">
+            <div className="absolute inset-0 rounded-full border-[3px] border-[#d4af37]/10"></div>
+            <div className="absolute inset-0 rounded-full border-[3px] border-t-[#d4af37] border-r-[#d4af37]/30 border-l-transparent border-b-transparent animate-spin"></div>
           </div>
 
-          <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+          <h2 className="text-lg font-medium text-gray-200 tracking-wide mb-1">
             Redirigiendo...
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">
+          <p className="text-xs text-[#d4af37]/90 font-semibold tracking-widest uppercase animate-pulse">
             Te estamos llevando a tu destino
           </p>
         </div>

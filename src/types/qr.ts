@@ -19,5 +19,6 @@ export interface GeneratedQR {
   options: QRCodeOptions;
   qrCode: string;
   timestamp: Date;
+  supabaseId?: string;
   scanCount?: number;
 }
