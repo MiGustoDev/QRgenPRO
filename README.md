@@ -1,81 +1,110 @@
-# 🎯 QR Generator Pro
-
 <div align="center">
-  <img src="https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/Vite-5.4.2-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+
+  <h1>✨ QRgenPRO</h1>
+  <p><strong>Suite Web Moderna & Profesional para la Generación y Gestión de Códigos QR Dinámicos</strong></p>
+
+  <p>
+    <a href="https://migusto.com.ar/tools/QR/" target="_blank">
+      <img src="https://img.shields.io/badge/🌐_Demo_En_Vivo-FF6B6B?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Demo Live" />
+    </a>
+    <a href="https://qr-gen-2n6g.bolt.host" target="_blank">
+      <img src="https://img.shields.io/badge/🚀_Acceso_Rápido-4CAF50?style=for-the-badge&logo=rocket&logoColor=white" alt="Ver Demo" />
+    </a>
+  </p>
+
+  <div>
+    <img src="https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Vite-5.4.2-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+    <img src="https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+  </div>
+
 </div>
 
-<div align="center">
-  <h3>🚀 Generador Profesional de Códigos QR</h3>
-  <p>App web moderna y completa para generar códigos QR de alta calidad con personalización avanzada</p>
+---
 
-  <a href="https://migusto.com.ar/tools/QR/" target="_blank">
-    <img src="https://img.shields.io/badge/🌐_Demo_Live-FF6B6B?style=for-the-badge" alt="Demo Live" />
-  </a>
+### 📌 Descripción para el Repositorio de GitHub
+> **QRgenPRO** es una aplicación web moderna y profesional diseñada para crear, personalizar y administrar códigos QR estáticos y dinámicos de alta resolución. Ofrece múltiples formatos (URL, WiFi, vCard, Email), integración de logos personalizados, modo oscuro/claro, historial local y redirección inteligente.
+
+---
+
+## 🖼️ Galería de Capturas
+
+<div align="center">
+  <table border="0" style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td width="50%" align="center" style="padding: 10px;">
+        <img src="public/screenshots/Screenshot_1.png" alt="QRgenPRO - Interfaz Principal" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); max-width: 100%; height: auto;" />
+        <br />
+        <sub><b>Vista Principal del Generador</b></sub>
+      </td>
+      <td width="50%" align="center" style="padding: 10px;">
+        <img src="public/screenshots/Screenshot_2.png" alt="QRgenPRO - Personalización y Opciones" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); max-width: 100%; height: auto;" />
+        <br />
+        <sub><b>Personalización Avanzada & Previsualización</b></sub>
+      </td>
+    </tr>
+  </table>
 </div>
-<img src="Demo.png" alt="Demo"/>
 
 ---
 
-## ✨ Características Principales
+## ✨ Características Destacadas
 
-### 🎨 **Interfaz Moderna**
-- **Diseño responsive** optimizado para móviles, tablets y desktop
-- **Modo oscuro/claro** con transiciones suaves
-- **Soporte multiidioma** (Español/Inglés)
-- **Animaciones fluidas** y micro-interacciones
+### 🎨 **Experiencia de Usuario Premium**
+- 🌓 **Modo Oscuro / Claro**: Transiciones fluidas y estética adaptativa elegante.
+- 🌐 **Soporte Multiidioma**: Interfaz bilingüe (Español e Inglés).
+- 📱 **Diseño 100% Responsive**: Optimizado para dispositivos móviles, tablets y monitores de alta resolución.
+- ⚡ **Previsualización en Tiempo Real**: Visualiza cada ajuste de color, logo o tamaño de forma instantánea.
 
-### 🔧 **Tipos de QR Soportados**
-- 🔗 **URL/Enlaces** - Sitios web y enlaces directos
-- 📝 **Texto** - Mensajes y contenido de texto
-- 📧 **Email** - Direcciones de correo electrónico
-- 📱 **Teléfono** - Números telefónicos
-- 📶 **WiFi** - Credenciales de red inalámbrica
-- 👤 **Contacto** - Tarjetas vCard con información personal
+### 🎨 **Personalización y Branding Avanzado**
+- 🎨 **Paleta de Colores Flexibles**: Selección de colores en primer plano y fondo con soporte transparente.
+- 📐 **Escalabilidad y Resoluciones**: Exportación configurable desde 128px hasta 512px.
+- 🖼️ **Incorporación de Logos**: Integración de marcas de agua o logos vectoriales centrados en el código QR.
+- 🛡️ **Niveles de Corrección de Errores**: Configuración de niveles L, M, Q y H para asegurar la lecturabilidad aún con daños mecánicos o logos superpuestos.
 
-### 🎯 **Personalización Avanzada**
-- **Tamaño variable** (128px - 512px)
-- **Colores personalizables** (primer plano y fondo)
-- **Niveles de corrección de errores** (L, M, Q, H)
-- **Vista previa en tiempo real**
-
-### 💾 **Gestión de Historial**
-- **Historial automático** de códigos generados
-- **Descarga individual** de códigos QR
-- **Eliminación selectiva** de registros
-- **Persistencia local** de datos
+### ⚡ **Redirección Inteligente & Códigos QR Dinámicos**
+- 🔗 **QR Dinámicos (Zero Database & Supabase)**: Redirección mediante parámetros auto-contenidos codificados o almacenamiento en base de datos.
+- 📊 **Métricas de Escaneo**: Contador automático de escaneos y registros locales.
+- ⏳ **Pantalla de Redirección Pro**: Experiencia de carga personalizada con marca de agua previa al destino.
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## 🎯 Tipos de Códigos QR Soportados
 
-### Frontend
-- **React 18.3.1** - Biblioteca de interfaz de usuario
-- **TypeScript 5.5.3** - Tipado estático
-- **Tailwind CSS 3.4.1** - Framework de estilos
-- **Vite 5.4.2** - Herramienta de construcción
-
-### Librerías Principales
-- **qrcode** - Generación de códigos QR
-- **lucide-react** - Iconografía moderna
-- **@types/qrcode** - Tipado para QR
-
+| Icono | Tipo | Descripción |
+| :---: | :--- | :--- |
+| 🔗 | **URL / Enlaces** | Redirección directa a páginas web, redes sociales y plataformas digitales. |
+| 📝 | **Texto Plano** | Mensajes de texto, notas, claves públicas o información general. |
+| 📧 | **Correo Electrónico** | Plantillas preconfiguradas con destinatario, asunto y cuerpo del mensaje. |
+| 📞 | **Teléfono** | Marcación directa al escanear desde dispositivos móviles. |
+| 📶 | **Red WiFi** | Conexión automática configurando SSID, contraseña y tipo de encriptación (WPA/WEP). |
+| 👤 | **Tarjeta vCard** | Tarjeta de contacto digital completa (nombre, teléfono, email, empresa, cargo). |
 
 ---
 
-## 📄 Licencia
+## 💾 Gestión de Historial y Persistencia
 
-Este proyecto está bajo la Licencia MIT.
+- 🕒 **Historial Automático**: Guarda tus códigos QR creados para acceso o reutilización posterior.
+- 📥 **Descarga Directa**: Exportación rápida en alta resolución.
+- 🗑️ **Gestión Selectiva**: Elimina registros del historial según tus necesidades.
+- 🔒 **Privacidad Total**: Almacenamiento local mediante `localStorage` con integración opcional en la nube.
 
 ---
 
+## 🚀 Tecnologías Principales
+
+- **React 18** — Biblioteca UI para componentes declarativos y reactivos.
+- **TypeScript 5** — Tipado estático robusto para un código seguro y mantenible.
+- **Tailwind CSS 3** — Framework estilístico utility-first para un acabado pulcro y moderno.
+- **Vite 5** — Bundler ultrarrápido de última generación.
+- **Lucide Icons** — Conjunto de iconos vectoriales limpios y modernos.
+- **Supabase** — Backend opcional para seguimiento y resolución de códigos QR dinámicos.
+
+---
 
 <div align="center">
-  <p>⭐ Si te gusta este proyecto, ¡dale una estrella en GitHub! ⭐</p>
-  
-  <a href="https://qr-gen-2n6g.bolt.host" target="_blank">
-    <img src="https://img.shields.io/badge/🚀_Ver_Demo-4CAF50?style=for-the-badge" alt="Ver Demo" />
-  </a>
+  <p>⭐ <i>Si este proyecto te resulta útil, ¡recuerda darle una estrella en GitHub!</i> ⭐</p>
+  <sub>Desarrollado con ❤️ para ofrecer una experiencia superior en generación de QR</sub>
 </div>
