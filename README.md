@@ -104,6 +104,62 @@
 
 ---
 
+## 🛠️ Instalación y Puesta en Marcha
+
+Sigue estos sencillos pasos para clonar y ejecutar el proyecto en tu entorno local:
+
+### 📋 Prerrequisitos
+- **Node.js** (versión 18.0 o superior recomendada)
+- Gestor de paquetes: **npm** o **pnpm**
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/tu-usuario/QRgenPRO.git
+cd QRgenPRO
+```
+
+### 2. Instalar dependencias
+```bash
+npm install
+# o con pnpm:
+# pnpm install
+```
+
+### 3. Configuración de variables de entorno (Opcional)
+Si deseas utilizar la persistencia en la nube y el contador de escaneos para códigos QR dinámicos con **Supabase**, crea un archivo `.env` a partir de la plantilla:
+
+```bash
+cp .env.example .env
+```
+
+Edita el archivo `.env` con las credenciales de tu proyecto Supabase:
+```env
+VITE_SUPABASE_URL=tu_supabase_url
+VITE_SUPABASE_ANON_KEY=tu_supabase_anon_key
+VITE_APP_URL=http://localhost:5173
+```
+
+> [!NOTE]
+> Puedes inicializar la tabla y funciones de Supabase ejecutando el script [supabase_setup.sql](file:///c:/Code/QRgenPRO/supabase_setup.sql) en el **SQL Editor** de tu consola de Supabase. Si no configuras Supabase, la app continuará funcionando con almacenamiento local (`localStorage`) y redirección auto-contenida sin requerir backend.
+
+### 4. Ejecutar en modo desarrollo
+```bash
+npm run dev
+# o con pnpm:
+# pnpm dev
+```
+
+Abre tu navegador en [http://localhost:5173](http://localhost:5173) para ver la aplicación en funcionamiento.
+
+### 5. Compilar para producción
+Para generar el bundle optimizado listo para desplegar:
+```bash
+npm run build
+```
+Los archivos de distribución se generarán en la carpeta `dist/`.
+
+---
+
 <div align="center">
   <p>⭐ <i>Si este proyecto te resulta útil, ¡recuerda darle una estrella en GitHub!</i> ⭐</p>
   <sub>Desarrollado con ❤️ para ofrecer una experiencia superior en generación de QR</sub>
